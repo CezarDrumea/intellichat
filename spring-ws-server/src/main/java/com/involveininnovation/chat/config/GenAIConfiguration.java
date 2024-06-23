@@ -15,5 +15,4 @@ public class GenAIConfiguration {
         return builder.build();
     }
 
-
 }
