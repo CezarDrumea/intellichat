@@ -11,7 +11,7 @@ public class GenAIConfiguration {
     @Bean
     public ChatLanguageModel chatLanguageModel() {
         OpenAiChatModel.OpenAiChatModelBuilder builder = OpenAiChatModel.builder()
-                .apiKey("sk-proj-BKk7YIJPiDAm5VsIxiO9T3BlbkFJa1nte1j4hiLvn3LRgOW7");
+                .apiKey(System.getenv("OPENAI_API_KEY"));
         return builder.build();
     }
 
