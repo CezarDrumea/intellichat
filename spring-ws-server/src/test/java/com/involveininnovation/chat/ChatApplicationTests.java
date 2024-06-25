@@ -1,4 +1,4 @@
-package com.involveininnovation.chat;
+package com.intellichat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

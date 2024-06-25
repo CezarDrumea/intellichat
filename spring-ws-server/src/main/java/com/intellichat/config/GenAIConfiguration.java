@@ -1,4 +1,4 @@
-package com.involveininnovation.chat.config;
+package com.intellichat.config;
 
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
