@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@ConditionalOnProperty(name = "database.type", havingValue = "h2")
+@ConditionalOnProperty(name = "database.type", havingValue = "postgres")
 public class PostgresDataSourceConfig {
 
     @Value("${spring.datasource.postgres.url}")
