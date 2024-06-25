@@ -3,6 +3,7 @@ package com.intellichat.service;
 import com.intellichat.model.Message;
 import com.intellichat.model.MessageDto;
 import com.intellichat.repository.MessageRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,10 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
 
-    @Autowired
-    private MessageRepository messageRepository;
+    private final MessageRepository messageRepository;
 
     public Message saveMessage(MessageDto message) {
         return messageRepository.save(Message.from(message));
