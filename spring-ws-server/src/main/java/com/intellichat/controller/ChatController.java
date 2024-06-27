@@ -1,6 +1,5 @@
 package com.intellichat.controller;
 
-import com.intellichat.model.Message;
 import com.intellichat.model.MessageDto;
 import com.intellichat.model.Status;
 import com.intellichat.service.MessageService;
@@ -19,9 +18,7 @@ import java.util.List;
 public class ChatController {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
-
     private final ChatLanguageModel chatLanguageModel;
-
     private final MessageService messageService;
 
     @MessageMapping("/message")
@@ -41,7 +38,7 @@ public class ChatController {
     }
 
     @MessageMapping("/private-message")
-    public MessageDto recMessage(@Payload MessageDto message){
+    public void recMessage(@Payload MessageDto message){
         simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private", message);
         if(message.getReceiverName().equals("GPT")) {
             MessageDto llmResposne = MessageDto.builder()
@@ -49,8 +46,14 @@ public class ChatController {
                     .message(chatLanguageModel.generate(message.getMessage()))
                     .status(Status.MESSAGE)
                     .build();
-            return llmResposne;
+            simpMessagingTemplate.convertAndSendToUser(message.getSenderName(),"/private", llmResposne);
         }
+    }
+
+    @MessageMapping("/join")
+    @SendTo("/chatroom/public")
+    public MessageDto userJoin(@Payload MessageDto message) {
+        message.setStatus(Status.JOIN);
         return message;
     }
 
