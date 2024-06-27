@@ -13,6 +13,7 @@ const ChatRoom = () => {
     connected: false,
     message: '',
   });
+
   useEffect(() => {
     console.log(userData);
   }, [userData]);
@@ -55,11 +56,11 @@ const ChatRoom = () => {
         setPublicChats([...publicChats]);
         break;
       default:
+        break;
     }
   };
 
   const onPrivateMessage = (payload) => {
-    console.log(payload);
     var payloadData = JSON.parse(payload.body);
     if (privateChats.get(payloadData.senderName)) {
       privateChats.get(payloadData.senderName).push(payloadData);
@@ -80,6 +81,7 @@ const ChatRoom = () => {
     const { value } = event.target;
     setUserData({ ...userData, message: value });
   };
+
   const sendValue = () => {
     if (stompClient) {
       var chatMessage = {
@@ -87,7 +89,6 @@ const ChatRoom = () => {
         message: userData.message,
         status: 'MESSAGE',
       };
-      console.log(chatMessage);
       stompClient.send('/app/message', {}, JSON.stringify(chatMessage));
       setUserData({ ...userData, message: '' });
     }
@@ -102,10 +103,9 @@ const ChatRoom = () => {
         status: 'MESSAGE',
       };
 
-      if (userData.username !== tab) {
-        privateChats.get(tab).push(chatMessage);
-        setPrivateChats(new Map(privateChats));
-      }
+      privateChats.get(tab).push(chatMessage);
+      setPrivateChats(new Map(privateChats));
+
       stompClient.send('/app/private-message', {}, JSON.stringify(chatMessage));
       setUserData({ ...userData, message: '' });
     }
@@ -121,10 +121,10 @@ const ChatRoom = () => {
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       {userData.connected ? (
-        <div className='chat-box'>
-          <div className='member-list'>
+        <div className="chat-box">
+          <div className="member-list">
             <ul>
               <li
                 onClick={() => {
@@ -147,96 +147,85 @@ const ChatRoom = () => {
               ))}
             </ul>
           </div>
-          {tab === 'CHATROOM' && (
-            <div className='chat-content'>
-              <ul className='chat-messages'>
-                {publicChats.map((chat, index) => (
-                  <li
+          <div className="chat-content">
+            <div className="chat-messages">
+              {tab === 'CHATROOM' &&
+                publicChats.map((chat, index) => (
+                  <div
                     className={`message ${
-                      chat.senderName === userData.username && 'self'
+                      chat.senderName === userData.username ? 'self' : ''
                     }`}
                     key={index}
                   >
                     {chat.senderName !== userData.username && (
-                      <div className='avatar'>{chat.senderName}</div>
+                      <div className="avatar">
+                        {chat.senderName.charAt(0).toUpperCase()}
+                      </div>
                     )}
-                    <pre className='message-data'>{chat.message}</pre>
+                    <div className="message-data">
+                      <strong>{chat.senderName}</strong>: {chat.message}
+                    </div>
                     {chat.senderName === userData.username && (
-                      <div className='avatar self'>{chat.senderName}</div>
+                      <div className="avatar self">
+                        {chat.senderName.charAt(0).toUpperCase()}
+                      </div>
                     )}
-                  </li>
+                  </div>
                 ))}
-              </ul>
-
-              <div className='send-message'>
-                <input
-                  type='text'
-                  className='input-message'
-                  placeholder='enter the message'
-                  value={userData.message}
-                  onChange={handleMessage}
-                />
-                <button
-                  type='button'
-                  className='send-button'
-                  onClick={sendValue}
-                >
-                  send
-                </button>
-              </div>
-            </div>
-          )}
-          {tab !== 'CHATROOM' && (
-            <div className='chat-content'>
-              <ul className='chat-messages'>
-                {[...privateChats.get(tab)].map((chat, index) => (
-                  <li
+              {tab !== 'CHATROOM' &&
+                privateChats.get(tab)?.map((chat, index) => (
+                  <div
                     className={`message ${
-                      chat.senderName === userData.username && 'self'
+                      chat.senderName === userData.username ? 'self' : ''
                     }`}
                     key={index}
                   >
                     {chat.senderName !== userData.username && (
-                      <div className='avatar'>{chat.senderName}</div>
+                      <div className="avatar">
+                        {chat.senderName.charAt(0).toUpperCase()}
+                      </div>
                     )}
-                    <div className='message-data'>{chat.message}</div>
+                    <div className="message-data">
+                      <strong>{chat.senderName}</strong>: {chat.message}
+                    </div>
                     {chat.senderName === userData.username && (
-                      <div className='avatar self'>{chat.senderName}</div>
+                      <div className="avatar self">
+                        {chat.senderName.charAt(0).toUpperCase()}
+                      </div>
                     )}
-                  </li>
+                  </div>
                 ))}
-              </ul>
-
-              <div className='send-message'>
-                <input
-                  type='text'
-                  className='input-message'
-                  placeholder='enter the message'
-                  value={userData.message}
-                  onChange={handleMessage}
-                />
-                <button
-                  type='button'
-                  className='send-button'
-                  onClick={sendPrivateValue}
-                >
-                  send
-                </button>
-              </div>
             </div>
-          )}
+            <div className="send-message">
+              <input
+                type="text"
+                className="input-message"
+                placeholder="enter the message"
+                value={userData.message}
+                onChange={handleMessage}
+              />
+              <button
+                type="button"
+                className="send-button"
+                onClick={tab === 'CHATROOM' ? sendValue : sendPrivateValue}
+              >
+                send
+              </button>
+            </div>
+          </div>
         </div>
       ) : (
-        <div className='register'>
+        <div className="register">
           <input
-            id='user-name'
-            placeholder='Enter your name'
-            name='userName'
+            id="user-name"
+            placeholder="Enter your name"
+            name="userName"
             value={userData.username}
             onChange={handleUsername}
-            margin='normal'
+            margin="normal"
+            className="input-register"
           />
-          <button type='button' onClick={registerUser}>
+          <button type="button" className="register-button" onClick={registerUser}>
             connect
           </button>
         </div>
