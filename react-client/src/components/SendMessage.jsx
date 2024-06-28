@@ -11,7 +11,7 @@ const SendMessage = ({
     <input
       type='text'
       className='input-message'
-      placeholder='enter the message'
+      placeholder='Enter the message'
       value={message}
       onChange={handleMessage}
     />
