@@ -200,7 +200,7 @@ ul {
     flex-direction: column;
   }
   .member-list {
-    width: 100%;
+    width: unset;
     height: 50vh;
     border-right: none;
     border-bottom: 1px solid #333;
