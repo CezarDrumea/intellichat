@@ -4,7 +4,7 @@ import SockJS from 'sockjs-client';
 import UserRegistration from './UserRegistration';
 import ChatBox from './ChatBox';
 
-const HOST = 'localhost';
+const HOST = '192.168.0.2';
 
 let stompClient = null;
 const ChatRoom = () => {

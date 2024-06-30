@@ -5,6 +5,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,8 +32,9 @@ public class Message {
 
     private String senderName;
     private String receiverName;
-    private String message;
 
+    @Column(columnDefinition = "TEXT")
+    private String message;
 
     @CreationTimestamp
     @Temporal(TIMESTAMP)
