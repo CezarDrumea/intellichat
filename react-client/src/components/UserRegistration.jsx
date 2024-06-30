@@ -11,7 +11,7 @@ const UserRegistration = ({ username, handleUsername, registerUser }) => (
       margin="normal"
       className="input-register"
     />
-    <button type="button" className="register-button">
+    <button className="register-button">
       connect
     </button>
   </form>

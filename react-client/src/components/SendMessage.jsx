@@ -15,9 +15,7 @@ const SendMessage = ({
       value={message}
       onChange={handleMessage}
     />
-    <button
-      type='button'
-      className='send-button'
+    <button className='send-button'
     >
       <svg
         height='24'
