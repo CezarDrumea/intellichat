@@ -1,21 +1,10 @@
-# ChatApplication
-Spring boot websocket backend and reactjs client
+## Start FE with:
 
-[Tutorial Link](https://youtu.be/o_IjEDAuo8Y)
+- cd react-client
+- npm i
+- npm start
 
-Server:
-    - Spring boot Websocket
+## Start BE with:
 
-Client
-    - ReactJS
-
-## ReactJS screen
-
-![Chat screen](img/chat-screen.jpg "Chat screen")
-
-To start:
-    ### Client
-        - npm install (in the react-client folder)
-        - npm start
-    ### Server
-        - mvn spring-boot:run (in the spring-ws-server)
+- cd spring-ws-server
+- mvn spring-boot:run
