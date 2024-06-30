@@ -7,7 +7,7 @@ const SendMessage = ({
   sendValue,
   sendPrivateValue,
 }) => (
-  <div className='send-message'>
+  <form className='send-message' onSubmit={tab === 'CHATROOM' ? sendValue : sendPrivateValue}>
     <input
       type='text'
       className='input-message'
@@ -18,7 +18,6 @@ const SendMessage = ({
     <button
       type='button'
       className='send-button'
-      onClick={tab === 'CHATROOM' ? sendValue : sendPrivateValue}
     >
       <svg
         height='24'
@@ -32,7 +31,7 @@ const SendMessage = ({
         </g>
       </svg>
     </button>
-  </div>
+  </form>
 );
 
 export default SendMessage;

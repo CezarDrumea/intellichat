@@ -84,7 +84,8 @@ const ChatRoom = () => {
     setUserData((prevUserData) => ({ ...prevUserData, message: value }));
   };
 
-  const sendValue = () => {
+  const sendValue = (e) => {
+    e.preventDefault();
     if (stompClient) {
       const chatMessage = {
         senderName: userData.username,
@@ -96,7 +97,8 @@ const ChatRoom = () => {
     }
   };
 
-  const sendPrivateValue = () => {
+  const sendPrivateValue = (e) => {
+    e.preventDefault();
     if (stompClient && tab !== userData.username) {
       const chatMessage = {
         senderName: userData.username,
@@ -120,7 +122,8 @@ const ChatRoom = () => {
     setUserData((prevUserData) => ({ ...prevUserData, username: value }));
   };
 
-  const registerUser = () => {
+  const registerUser = (e) => {
+    e.preventDefault();
     connect();
   };
 

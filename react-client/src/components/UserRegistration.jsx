@@ -1,7 +1,7 @@
 import React from 'react';
 
 const UserRegistration = ({ username, handleUsername, registerUser }) => (
-  <div className="register">
+  <form className="register" onSubmit={registerUser}>
     <input
       id="user-name"
       placeholder="Enter your name"
@@ -11,10 +11,10 @@ const UserRegistration = ({ username, handleUsername, registerUser }) => (
       margin="normal"
       className="input-register"
     />
-    <button type="button" className="register-button" onClick={registerUser}>
+    <button type="button" className="register-button">
       connect
     </button>
-  </div>
+  </form>
 );
 
 export default UserRegistration;
