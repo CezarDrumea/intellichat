@@ -4,9 +4,8 @@ import SockJS from 'sockjs-client';
 import UserRegistration from './UserRegistration';
 import ChatBox from './ChatBox';
 
-const HOST = '192.168.0.2';
-
 let stompClient = null;
+
 const ChatRoom = () => {
   const [privateChats, setPrivateChats] = useState(new Map());
   const [publicChats, setPublicChats] = useState([]);
@@ -23,7 +22,7 @@ const ChatRoom = () => {
   }, [userData]);
 
   const connect = () => {
-    let Sock = new SockJS(`http://${HOST}:8080/ws`);
+    let Sock = new SockJS(`http://${process.env.REACT_APP_HOST}:8080/ws`);
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
   };

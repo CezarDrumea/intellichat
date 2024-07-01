@@ -2,9 +2,9 @@
 
 - cd react-client
 - npm i
-- npm start
+- REACT_APP_HOST=[host] npm start
 
 ## Start BE with:
 
 - cd spring-ws-server
-- mvn spring-boot:run
+- OPEN_API_KEY=[apikey] mvn spring-boot:run
